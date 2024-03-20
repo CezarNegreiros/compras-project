@@ -1,8 +1,18 @@
 package com.cezarNegreiros.compras.entities;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User{
+@Entity
+@Table(name = "tb_user")
+public class User implements Serializable {
+
+    private static final long serialVerionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
@@ -18,14 +28,6 @@ public class User{
         this.email = email;
         this.phone = phone;
         this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
     }
 
     public Long getId() {
@@ -66,6 +68,14 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
     }
 
     @Override
