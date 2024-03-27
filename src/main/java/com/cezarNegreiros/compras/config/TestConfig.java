@@ -1,8 +1,10 @@
 package com.cezarNegreiros.compras.config;
 
+import com.cezarNegreiros.compras.entities.Category;
 import com.cezarNegreiros.compras.entities.Order;
 import com.cezarNegreiros.compras.entities.User;
 import com.cezarNegreiros.compras.entities.enums.OrderStatus;
+import com.cezarNegreiros.compras.repositories.CategoryRepository;
 import com.cezarNegreiros.compras.repositories.OrderRepository;
 import com.cezarNegreiros.compras.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,18 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
         User u1 = new User(null, "Cezar Negreiros", "Cezar@gmail.com", "(92) 98888-8888", "123456");
         User u2 = new User(null, "Carlos Costa", "Carlos@gmail.com", "(92) 97777-7777", "123456");
 
